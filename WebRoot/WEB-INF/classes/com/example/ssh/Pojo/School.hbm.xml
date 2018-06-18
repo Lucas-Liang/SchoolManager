@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.ssh.Pojo">
+	<class name="com.example.ssh.Pojo.School" table="School">
+	<!-- 设置数据库中的相关的字段 -->
+		<id name="s_id" column="s_id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="s_name" column="s_name" length="20"/>
+		<property name="s_address" column="s_address" length="20"/>
+		<set name="setClass"  cascade="save-update" inverse="true">
+         <key column="c_id"></key>
+         <one-to-many class="com.example.ssh.Pojo.Class"/>
+        </set>
+	</class>
+	
+</hibernate-mapping>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.example.ssh.Pojo">
+	<class name="com.example.ssh.Pojo.User" table="Users">
+	<!-- 设置数据库中的相关的字段 -->
+		<id name="u_id" column="u_id">
+			<generator class="native">
+			</generator>
+		</id>
+		<property name="u_usename" column="u_usename" length="20"/>
+		<property name="u_password" column="u_password" length="20"/>
+		<property name="u_mail" column="u_mail" length="20"/>
+		<property name="u_phone" column="u_phone" length="20"/>
+	</class>
+	
+</hibernate-mapping>
