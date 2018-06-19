@@ -22,14 +22,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
    <script src="${pageContext.request.contextPath }/js/jquery-1.8.3.js"></script>
-  	<script type="text/javascript">
+   <script type="text/javascript">
 		
   		//获取所有省份
   		function ajaxSchoolList(){
   			$("#school").empty();//清空  
   			var url = "<%=basePath%>class_AjaxSchoolList.action";
-  			$("#school").append("<option id='' value=''>---请选择学校---</option>");  
-  			
+  			var id = "<s:property value="%{model.class1.school.s_id}" />";
+  			var name = "<s:property value="%{model.class1.school.s_name}" />";
+  			$("#school").append("<option id='"+id+"' value='"+id+"'>"+name+"</option>");  
   			$.ajax({
   				type : "post",  
 		        url : url,  
@@ -41,15 +42,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                  
                     for(var n=0;n<data.length;n++){  
 		              var ids=data[n].s_id;  //省份id
-		                var names=data[n].s_name;  //省份名称
-		                $("#school").append("<option id='"+ids+"' value='"+ids+"'>"+names+"</option>");  
-		              } 
+		              var names=data[n].s_name;  //省份名称
+		              if(ids==id){
+		              }else{
+		               $("#school").append("<option id='"+ids+"' value='"+ids+"'>"+names+"</option>");  
+		 
+		              }
+		            } 
        			 }  
   			
   			});
-  		}
+  	}
   		
-  		  
+  		
+  	
+  		function getclass(obj) {  
+		    $("#class").empty();//清空  
+		            
+		     var proviceid;
+		     
+		     for(var i=0;i<obj.options.length;i++){
+		         
+			        if(obj.options[i].selected){
+			          
+			           proviceid =obj.options[i].id;
+			        }
+   			 }
+   			
+		   	var url = "<%=basePath%>student_AjaxClassList.action?s_id="+proviceid;
+		    $.ajax({  
+		        type : "POST",  
+		        url : url,  
+		        data : {},  
+		        dataType : "JSON",  
+		        success : function(data) {  
+		            //data为后台返回的Json信息  
+		            for(var n=0;n<data.length;n++){  
+		              var ids=data[n].c_id;  
+		                var names=data[n].c_name;  
+		                $("#class").append("<option id='"+ids+"' value='"+ids+"'>"+names+"</option>");  
+		                } 
+		       		 }   
+   			 	}) 
+			}  
   	</script>
 </head>
 <body  onload="ajaxSchoolList()">
@@ -87,14 +122,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
                    
 
-                    <li class="active-link">
+                    <li >
                         <a href=""><i class="fa fa-table "></i>班级管理 </a>
                     </li>
-                    <li>
+                    <li class="active-link">
                         <a href="student_findAll"><i class="fa fa-edit "></i>学生管理 </a>
-                    </li>                    
+                    </li>
+                                      
                 </ul>
-                            </div>
+       </div>
 
         </nav>
         <!-- /. NAV SIDE  -->
@@ -106,16 +142,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <h2>欢迎使用，尊敬的"  <s:property value="#session.User.u_usename"/>"用户</h2>
                     </div>
                 </div>
-                <!-- /. ROW  -->
+                
                 <hr />
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="breadcrumb">
 							<li>
-								<a href="class_findAll.action">学校信息管理  </a><span class="divider"></span>
+								<a href="class_findAll.action">学生信息管理  </a><span class="divider"></span>
 							</li>
 							<li class="active">
-							添加学校信息<span class="divider"></span>
+							添加学生信息<span class="divider"></span>
 							</li>
 						</ul>
                     </div>
@@ -125,33 +161,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <h3 class="text-info">添加学校信息</h3>
+                        <h3 class="text-info">修改学校信息</h3>
 						<br>
-							<s:form action ="class_save" method = "post" namespace ="/" them ="simple">
+							<s:form action ="student_update" method = "post" namespace ="/" them ="simple">
+								<s:hidden name="st_id" value="%{model.st_id}" />
+								
 								<div class="control-group">
 									<div class="controls">
 						 				<label for="name" class="control-label">选择学校</label>
-										 <select class="form-control" id="school" name="s_id">
+										 <select class="form-control" id="school" name="s_id" onchange="getclass(this)" >
 										
 										 </select>
 									</div>
 								</div>
 								<div class="control-group">
 									<div class="controls">
-						 			<label class="control-label" for="inputEmail">班级名称</label>
-						 			<input id="inputEmail" type="text" name="c_name" class="form-control"/>
+						 				<label for="name" class="control-label">选择班级</label>
+										 <select class="form-control" id="class" name="c_id">
+										    <option id='' value='<s:property value="%{model.class1.c_id}" />'><s:property value="%{model.class1.c_name}" /></option>
+										 </select>
 									</div>
 								</div>
 								<div class="control-group">
-					        <div class="controls">
-						      <label class="control-label" for="inputPassword">班级简介</label>
-						     <input id="inputPassword" type="text" name="c_info" class="form-control"/>
-							</div>
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生姓名</label>
+						 			<input id="inputEmail" type="text" name="st_name" class="form-control" value='<s:property value="%{model.st_name}" />'/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生性别</label>
+						 			<input id="inputEmail" type="text" name="st_sex" class="form-control" value='<s:property value="%{model.st_sex}" />'/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生邮箱</label>
+						 			<input id="inputEmail" type="text" name="st_mail" class="form-control" value='<s:property value="%{model.st_mail}" />'/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生手机</label>
+						 			<input id="inputEmail" type="text" name="st_phone" class="form-control" value='<s:property value="%{model.st_phone}" />'/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">家庭地址</label>
+						 			<input id="inputEmail" type="text" name="st_address" class="form-control" value='<s:property value="%{model.st_address}" />'/>
+									</div>
+								</div>
+						
 					
-						<br>
+						     <br>
 				   			<div class="control-group">
 							<div class="controls">
-						  <button type="submit" class="btn">添加</button>
+						  <button type="submit" class="btn">修改</button>
 							</div>
 				</div>
 				

@@ -55,10 +55,10 @@ public class ClassAction extends ActionSupport implements ModelDriven<com.exampl
 	public String save() {
 		String c = ServletActionContext.getRequest().getParameter("s_id");   //获取用户名  
 //		String c_search = new String(c.getBytes("iso-8859-1"),"UTF-8");
+		
 		School school = new School();
 		school.setS_id(Integer.parseInt(c));
 		class1.setSchool(school);
-		
 		classService.add(class1);
 		IndexPage<com.example.ssh.Pojo.Class> index = classService.findByPage(IndexPage);
 		ActionContext.getContext().getValueStack().push(index);

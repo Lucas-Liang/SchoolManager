@@ -13,7 +13,7 @@
 		<property name="c_name" column="c_name" length="20"/>
 		<property name="c_info" column="c_info" length="20"/>
 		
-		<set name="student"  cascade="save-update" inverse="true">
+		<set name="student"  cascade="save-update" inverse="true" lazy="false">
          <key column="st_id"></key>
          <one-to-many class="com.example.ssh.Pojo.Student"/>
         </set>

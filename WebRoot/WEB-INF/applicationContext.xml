@@ -31,9 +31,10 @@
 				<value>com/example/ssh/Pojo/User.hbm.xml</value>
 				<value>com/example/ssh/Pojo/School.hbm.xml</value>
 				<value>com/example/ssh/Pojo/Class.hbm.xml</value>
-				
+				<value>com/example/ssh/Pojo/Student.hbm.xml</value>
 			</list>
 		</property>
+		
 	    <property name="schemaUpdate">  
 	        <value>true</value>  
 	    </property>  
@@ -57,6 +58,9 @@
  	<bean id="classAction" class="com.example.ssh.Action.ClassAction" scope="prototype">
  		<property name="classService" ref="classService"/>
  	</bean>
+ 	<bean id="studentAction" class="com.example.ssh.Action.StudentAction" scope="prototype">
+ 		<property name="studentService" ref="studentService"/>
+ 	</bean>
  	
  	
 	<!-- 配置Services层的东西 -->
@@ -69,6 +73,9 @@
  	<bean id="classService" class="com.example.ssh.Service.ClassService">
  		<property name="classDao" ref="classDao"/>
  	</bean>
+ 	<bean id="studentService" class="com.example.ssh.Service.StudentService">
+ 		<property name="studentDao" ref="studentDao"/>
+ 	</bean>
  	
  	
  	
@@ -80,6 +87,9 @@
  		 <property name="sessionFactory" ref="sf" />
  	</bean>
  	<bean id="classDao" class="com.example.ssh.Dao.ClassDao">
+ 		 <property name="sessionFactory" ref="sf" />
+ 	</bean>
+ 	<bean id="studentDao" class="com.example.ssh.Dao.StudentDao">
  		 <property name="sessionFactory" ref="sf" />
  	</bean>
  	

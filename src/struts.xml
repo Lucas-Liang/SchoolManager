@@ -25,6 +25,12 @@
  			<result name="search">/class.jsp</result>
  			<result name="add">/add_class.jsp</result>
  			<result name="edit">/edit_class.jsp</result>
+  		</action>
+  		 <action name="student_*" class="studentAction" method="{1}">
+ 			<result name="findAll">/student.jsp</result>
+ 			<result name="search">/student.jsp</result>
+ 			<result name="add">/add_student.jsp</result>
+ 			<result name="edit">/edit_student.jsp</result>
   		</action> 
  	</package>
 </struts>

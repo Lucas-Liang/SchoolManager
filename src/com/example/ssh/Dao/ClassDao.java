@@ -91,7 +91,7 @@ public class ClassDao extends HibernateDaoSupport{
 			School school =findById_School(s_id);
 			list.get(i).setSchool(school);
 		}
-		session.close();
+		
 		return list;
 	}
 	

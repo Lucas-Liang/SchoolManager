@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		//获取所有省份
   		function ajaxSchoolList(){
   			$("#school").empty();//清空  
-  			var url = "<%=basePath%>class_AjaxSchoolList.action";
+  			var url = "<%=basePath%>student_AjaxSchoolList.action";
   			$("#school").append("<option id='' value=''>---请选择学校---</option>");  
   			
   			$.ajax({
@@ -40,16 +40,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    var tt = ""; 
                  
                     for(var n=0;n<data.length;n++){  
-		              var ids=data[n].s_id;  //省份id
-		                var names=data[n].s_name;  //省份名称
+		              var ids=data[n].s_id;  
+		                var names=data[n].s_name;  
 		                $("#school").append("<option id='"+ids+"' value='"+ids+"'>"+names+"</option>");  
 		              } 
        			 }  
   			
   			});
   		}
-  		
-  		  
+  	
+  		function getclass(obj) {  
+		    $("#class").empty();//清空  
+		            
+		     var proviceid;
+		     
+		     for(var i=0;i<obj.options.length;i++){
+		         
+			        if(obj.options[i].selected){
+			          
+			           proviceid =obj.options[i].id;
+			        }
+   			 }
+   			
+		   	var url = "<%=basePath%>student_AjaxClassList.action?s_id="+proviceid;
+		    $.ajax({  
+		        type : "POST",  
+		        url : url,  
+		        data : {},  
+		        dataType : "JSON",  
+		        success : function(data) {  
+		            //data为后台返回的Json信息  
+		            for(var n=0;n<data.length;n++){  
+		              var ids=data[n].c_id;  
+		                var names=data[n].c_name;  
+		                
+		                $("#class").append("<option id='"+ids+"' value='"+ids+"'>"+names+"</option>");  
+		                } 
+		       		 }   
+   			 	}) 
+			}  
   	</script>
 </head>
 <body  onload="ajaxSchoolList()">
@@ -127,28 +156,56 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="col-lg-6 col-md-6">
                         <h3 class="text-info">添加学校信息</h3>
 						<br>
-							<s:form action ="class_save" method = "post" namespace ="/" them ="simple">
+							<s:form action ="student_save" method = "post" namespace ="/" them ="simple">
 								<div class="control-group">
 									<div class="controls">
 						 				<label for="name" class="control-label">选择学校</label>
-										 <select class="form-control" id="school" name="s_id">
+										 <select class="form-control" id="school" name="s_id" onchange="getclass(this)" >
 										
 										 </select>
 									</div>
 								</div>
 								<div class="control-group">
 									<div class="controls">
-						 			<label class="control-label" for="inputEmail">班级名称</label>
-						 			<input id="inputEmail" type="text" name="c_name" class="form-control"/>
+						 				<label for="name" class="control-label">选择班级</label>
+										 <select class="form-control" id="class" name="c_id">
+										
+										 </select>
 									</div>
 								</div>
 								<div class="control-group">
-					        <div class="controls">
-						      <label class="control-label" for="inputPassword">班级简介</label>
-						     <input id="inputPassword" type="text" name="c_info" class="form-control"/>
-							</div>
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生姓名</label>
+						 			<input id="inputEmail" type="text" name="st_name" class="form-control"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生性别</label>
+						 			<input id="inputEmail" type="text" name="st_sex" class="form-control"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生邮箱</label>
+						 			<input id="inputEmail" type="text" name="st_mail" class="form-control"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">学生手机</label>
+						 			<input id="inputEmail" type="text" name="st_phone" class="form-control"/>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="controls">
+						 			<label class="control-label" for="inputEmail">家庭地址</label>
+						 			<input id="inputEmail" type="text" name="st_address" class="form-control"/>
+									</div>
+								</div>
+						
 					
-						<br>
+						     <br>
 				   			<div class="control-group">
 							<div class="controls">
 						  <button type="submit" class="btn">添加</button>

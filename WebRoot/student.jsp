@@ -35,11 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </button>
                     <a class="navbar-brand" href="#">
                         <img src="assets/img/logo.png" />
-
                     </a>
-                    
                 </div>
-              
                 <span class="logout-spn" >
                   <a href="#" style="color:#fff;">注销登录</a>  
 
@@ -56,11 +53,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </li>
                    
 
-                    <li  class="active-link">
-                        <a href="" > <i class="fa fa-table"></i>班级管理 </a>
+                    <li >
+                        <a href="class_findAll.action" > <i class="fa fa-table"></i>班级管理 </a>
                     </li>
-                    <li>
-                        <a href="student_findAll"><i class="fa fa-edit "></i>学生管理 </a>
+                    <li class="active-link">
+                        <a href=""><i class="fa fa-edit "></i>学生管理 </a>
                     </li>                    
                 </ul>
               </div>
@@ -80,15 +77,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <hr />
                   <% 
                   request.setCharacterEncoding("UTF-8");
-                  String s = request.getParameter("c_search");
-                  String c_search = "";
+                  String s = request.getParameter("st_search");
+                   String st_search = "";
 			      if(s!=null){
-			         c_search = new String(s.getBytes("iso-8859-1"),"UTF-8");
+			       st_search = new String(s.getBytes("iso-8859-1"),"UTF-8");
                    %>
                 <div class="row">
                     <div class="col-lg-12 ">
                         <div class="alert alert-info">
-                             <strong>当前搜索:<%=c_search %></strong>
+                             <strong>当前搜索:<%=st_search %></strong>
                         </div>
                     </div>
                 </div>
@@ -100,23 +97,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<ul class="breadcrumb">
 		<%
 			
-			if(c_search==null||c_search.equals("")){
+			if(st_search==null||st_search.equals("")){
 			%>
 				<li class="active">
-					班级信息管理  <span class="divider"></span>
+					学生信息管理  <span class="divider"></span>
 				</li>
 				<li>
-					<a href="class_add.action">添加班级信息</a> <span class="divider"></span>
+					<a href="student_add.action">添加学生信息</a> <span class="divider"></span>
 				</li>
 				
 			<%
 			}else{
 			 %>
 				<li>
-					<a href="class_findAll.action">班级信息管理</a>  <span class="divider"></span>
+					<a href=student_findAll.action">班级信息管理</a>  <span class="divider"></span>
 				</li>
 				<li>
-					<a href="class_add">班级学校信息</a>  <span class="divider"></span>
+					<a href="student_add">班级学校信息</a>  <span class="divider"></span>
 				</li>
 				<li  class="active">
 					班级-搜索结果
@@ -133,8 +130,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-			<s:form action ="class_search" method = "get" namespace ="/" them ="simple">
-				<input class="input-medium search-query" type="text"  name="c_search" /> 
+			<s:form action ="student_search" method = "get" namespace ="/" them ="simple">
+				<input class="input-medium search-query" type="text"  name="st_search" /> 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn">搜索</button>
 			</s:form>
 			<br>
@@ -144,21 +141,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<thead>
 					<tr>
 						<th>
-							序号
+							序&nbsp;&nbsp;号
 						</th>
 						<th>
-							学校名称
+							学&nbsp;&nbsp;校
 						</th>
 						<th>
-							班级名称
+							班&nbsp;&nbsp;级
 						</th>
 						<th>
-							班级信息
+							学&nbsp;&nbsp;生
 						</th>
 						<th>
-							状态
+							性&nbsp;&nbsp;别
 						</th>
-				
+						<th>
+							电&nbsp;&nbsp;话
+						</th>
+						<th>
+							家庭地址
+						</th>
+						<th>
+							状&nbsp;&nbsp;态
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -167,14 +172,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 					<tr class="success">
 						<td><%=i++ %> </td>
-						<td><s:property value="#c.school.s_name" /></td>
-						<td><s:property value="#c.c_name" /></td>
-						<td><s:property value="#c.c_info"/></td>
+						<td><s:property value="#c.class1.school.s_name" /></td>
+						<td><s:property value="#c.class1.c_name" /></td>
+						<td><s:property value="#c.st_name"/></td>
+						<td><s:property value="#c.st_sex"/></td>
+						<td><s:property value="#c.st_phone"/></td>
+						<td><s:property value="#c.st_address"/></td>
 						<td>
-							<a href="class_edit.action?c_id=${c.c_id}">编辑</a>
+							<a href="student_edit.action?st_id=${c.st_id}">编辑</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="deleteProduct?c_id=${c.c_id}">删除</a>
-						</td>		
+							<a href="deleteProduct?st_id=${c.st_id}">删除</a>
+						</td>
+								
 					</tr>
 				</s:iterator>
 				</tbody>
@@ -186,23 +195,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    					<span>第<s:property value="indexPage" />/<s:property value="indexCount" />页</span>
   					<span>总记录数：<s:property value="pageCount" />&nbsp;&nbsp;每页显示：<s:property value="pageSize" /></span>
   					<span>
-  					<% if(c_search==null||c_search.equals("")){%>
+  					<% if(st_search==null||st_search.equals("")){%>
   					<s:if test="indexPage != 1">
-       				<a href="${pageContext.request.contextPath}/class_findAll.action?indexPage=1">[首页]</a>&nbsp;&nbsp;
-       				<a href="${pageContext.request.contextPath}/class_findAll.action?indexPage=<s:property value="indexPage-1" />">[上一页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_findAll.action?indexPage=1">[首页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_findAll.action?indexPage=<s:property value="indexPage-1" />">[上一页]</a>&nbsp;&nbsp;
       				</s:if>
       				<s:if test="indexPage !=indexCount">
-       				<a href="${pageContext.request.contextPath}/class_findAll.action?indexPage=<s:property value="indexPage+1" />">[下一页]</a>&nbsp;&nbsp;
-       				<a href="${pageContext.request.contextPath}/class_findAll.action?indexPage=<s:property value="indexCount" />">[尾页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_findAll.action?indexPage=<s:property value="indexPage+1" />">[下一页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_findAll.action?indexPage=<s:property value="indexCount" />">[尾页]</a>&nbsp;&nbsp;
        				</s:if> 
        				<%}else{ %>
        				<s:if test="indexPage != 1">
-       				<a href="${pageContext.request.contextPath}/class_search.action?indexPage=1&c_search=<%=c_search %>">[首页]</a>&nbsp;&nbsp;
-       				<a href="${pageContext.request.contextPath}/class_search.action?indexPage=<s:property value="indexPage-1" />&c_search=<%=c_search %>">[上一页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_search.action?indexPage=1&st_search=<%=st_search %>">[首页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_search.action?indexPage=<s:property value="indexPage-1" />&st_search=<%=st_search %>">[上一页]</a>&nbsp;&nbsp;
       				</s:if>
-      				<s:if test="indexPage !=indexCount">
-       				<a href="${pageContext.request.contextPath}/class_search.action?indexPage=<s:property value="indexPage+1" />&c_search=<%=c_search %>">[下一页]</a>&nbsp;&nbsp;
-       				<a href="${pageContext.request.contextPath}/class_search.action?indexPage=<s:property value="indexCount" />&c_search=<%=c_search %>">[尾页]</a>&nbsp;&nbsp;
+      				<s:if test="indexCount!=0">
+       				<a href="${pageContext.request.contextPath}/student_search.action?indexPage=<s:property value="indexPage+1" />&st_search=<%=st_search %>">[下一页]</a>&nbsp;&nbsp;
+       				<a href="${pageContext.request.contextPath}/student_search.action?indexPage=<s:property value="indexCount" />&st_search=<%=st_search %>">[尾页]</a>&nbsp;&nbsp;
        				</s:if> 
        				<%} %>
    					</span>
