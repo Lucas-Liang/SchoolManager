@@ -12,8 +12,8 @@
 		</id>
 		<property name="s_name" column="s_name" length="20"/>
 		<property name="s_address" column="s_address" length="20"/>
-		<set name="setClass"  cascade="save-update" inverse="true" lazy="false">
-         <key column="c_id"></key>
+		<set name="setClass" lazy="false">
+         <key column="s_id" not-null="false"></key>
          <one-to-many class="com.example.ssh.Pojo.Class"/>
         </set>
 	</class>

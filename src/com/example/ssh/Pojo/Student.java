@@ -8,11 +8,7 @@ public class Student {
 	private String  st_phone;
 	private String  st_address;
 	private com.example.ssh.Pojo.Class  class1;
-	@Override
-	public String toString() {
-		return "Student [st_id=" + st_id + ", st_name=" + st_name + ", st_sex=" + st_sex + ", st_mail=" + st_mail
-				+ ", st_phone=" + st_phone + ", st_address=" + st_address + ", class1=" + class1 + "]";
-	}
+	
 	public Integer getSt_id() {
 		return st_id;
 	}

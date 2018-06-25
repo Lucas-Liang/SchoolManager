@@ -139,7 +139,12 @@ public class StudentAction extends ActionSupport implements ModelDriven<Student>
 			e.printStackTrace();
 		}
 	}
-	
+	public String delete(){
+		studentService.delete(student);
+		IndexPage<Student> index = studentService.findByPage(IndexPage);
+		ActionContext.getContext().getValueStack().push(index);
+		return "findAll";
+	}
 	
 
 }

@@ -9,7 +9,7 @@ public class School {
 	private String  s_name;
 	private String  s_address;
 	
-	private Set<com.example.ssh.Pojo.Class> setClass = new HashSet<com.example.ssh.Pojo.Class>();
+	private Set<com.example.ssh.Pojo.Class> setClass;
 	
 	public Set<com.example.ssh.Pojo.Class> getSetClass() {
 		return setClass;
@@ -17,10 +17,7 @@ public class School {
 	public void setSetClass(Set<com.example.ssh.Pojo.Class> setClass) {
 		this.setClass = setClass;
 	}
-	@Override
-	public String toString() {
-		return "School [s_id=" + s_id + ", s_name=" + s_name + ", s_address=" + s_address + "]";
-	}
+	
 	public Integer getS_id() {
 		return s_id;
 	}

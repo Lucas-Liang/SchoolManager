@@ -25,7 +25,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	
 	public String login(){
 		System.out.println("ManagerAction中的login被执行了.....");
-		System.out.println("user中的login被执行了....."+users.toString());
+		
 		User user = userService.login(users);
 		if(user==null){
 //			登录失败

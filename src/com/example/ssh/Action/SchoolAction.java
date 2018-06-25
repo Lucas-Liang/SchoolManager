@@ -72,5 +72,11 @@ public class SchoolAction extends ActionSupport implements ModelDriven<School> {
 		ActionContext.getContext().getValueStack().push(index);
 		return "findAll";
 	}
+	public String delete(){
+		schoolService.delete(school);
+		IndexPage<School> index = schoolService.findByPage(IndexPage);
+		ActionContext.getContext().getValueStack().push(index);
+		return "findAll";
+	}
 	
 }

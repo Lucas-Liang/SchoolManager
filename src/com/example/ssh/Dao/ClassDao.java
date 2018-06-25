@@ -79,7 +79,7 @@ public class ClassDao extends HibernateDaoSupport{
         session = this.getHibernateTemplate().getSessionFactory().openSession();
 		String hqlString = "FROM  Class  WHERE c_name LIKE '%"+s_search+"%' OR c_info LIKE '%"+s_search+"%'";
 		List<com.example.ssh.Pojo.Class> list = new  ArrayList<com.example.ssh.Pojo.Class>();
-		Query query = session.createQuery(hqlString.toString());
+		Query query = session.createQuery(hqlString);
 		query.setMaxResults(pageSize);
 		query.setFirstResult(begin); 
 		list = query.list();
@@ -118,12 +118,16 @@ public class ClassDao extends HibernateDaoSupport{
         session = this.getHibernateTemplate().getSessionFactory().openSession();
 		String hqlString = "FROM  School ";
 		List<School> list = new  ArrayList<School>();
-		Query query = session.createQuery(hqlString.toString()); 
+		Query query = session.createQuery(hqlString); 
 		list = query.list();
 		System.out.println("--------->"+list.size());
 		session.close();
 		// TODO Auto-generated method stub
 		return list;
+	}
+	public void delete(com.example.ssh.Pojo.Class class1) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().delete(class1);
 	}
 
 }

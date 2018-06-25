@@ -17,11 +17,7 @@ public class IndexPage<T> {
 	private int indexCount;/*页数总数*/
 	private List<T> list;/*集合*/
 	
-	@Override
-	public String toString() {
-		return "IndexPage [indexPage=" + indexPage + ", pageSize=" + pageSize + ", pageCount=" + pageCount
-				+ ", indexCount=" + indexCount + ", list=" + list + "]";
-	}
+	
 	public int getIndexPage() {
 		return indexPage;
 	}

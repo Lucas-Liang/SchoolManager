@@ -51,7 +51,7 @@ public class StudentService {
 		int begin = (indexPage-1)*pageSize;
 		List<Student> list = studentDao.findByPageSreach(begin,pageSize,s_search);
 		inPage.setList(list);
-		System.out.println("----------->"+inPage.toString());
+		System.out.println("----------->"+inPage);
 		return inPage;
 	}
 	public void add(Student class1) {
@@ -65,7 +65,7 @@ public class StudentService {
 	}
 	public void updata(Student class1) {
 		// TODO Auto-generated method stub
-		System.out.println(class1.toString());
+		System.out.println(class1);
 		studentDao.updata(class1);
 		
 	}
@@ -76,6 +76,10 @@ public class StudentService {
 	public List<School> getSchoolList() {
 		// TODO Auto-generated method stub
 		return studentDao.getSchoolList();
+	}
+	public void delete(Student student) {
+		// TODO Auto-generated method stub
+		studentDao.delete(student);
 	}
 	
 

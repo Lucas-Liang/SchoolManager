@@ -92,7 +92,7 @@ public class StudentDao extends HibernateDaoSupport{
         
 		String hql = "FROM  Student  WHERE st_name LIKE '%"+s_search+"%' OR st_address LIKE '%"+s_search+"%'";
 		List<Student> list = new  ArrayList<Student>();
-		Query query = this.getHibernateTemplate().getSessionFactory().openSession().createQuery(hqlString.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().openSession().createQuery(hqlString);
 		query.setMaxResults(pageSize);
 		query.setFirstResult(begin); 
 		list = query.list();
@@ -142,7 +142,7 @@ public class StudentDao extends HibernateDaoSupport{
         session = this.getHibernateTemplate().getSessionFactory().openSession();
 		String hqlString = "FROM  Class where s_id ="+s_id+"";
 		List<com.example.ssh.Pojo.Class> list = new  ArrayList<com.example.ssh.Pojo.Class>();
-		Query query = session.createQuery(hqlString.toString()); 
+		Query query = session.createQuery(hqlString); 
 		list = query.list();
 		System.out.println("--------->"+list.size());
 		session.close();
@@ -155,11 +155,15 @@ public class StudentDao extends HibernateDaoSupport{
         session = this.getHibernateTemplate().getSessionFactory().openSession();
 		String hqlString = "FROM  School ";
 		List<School> list = new  ArrayList<School>();
-		Query query = session.createQuery(hqlString.toString()); 
+		Query query = session.createQuery(hqlString); 
 		list = query.list();
 		System.out.println("--------->"+list.size());
 		session.close();
 		return list;
+	}
+	public void delete(Student student) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().delete(student);
 	}
 
 }

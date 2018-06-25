@@ -69,7 +69,7 @@ public class SchoolDao  extends HibernateDaoSupport{
         session = this.getHibernateTemplate().getSessionFactory().openSession();
 		String hqlString = "FROM School  WHERE s_name LIKE '%"+s_search+"%' OR s_address LIKE '%"+s_search+"%'";
 		List<School> list = new  ArrayList<School>();
-		Query query = session.createQuery(hqlString.toString());
+		Query query = session.createQuery(hqlString);
 		query.setMaxResults(pageSize);
 		query.setFirstResult(begin); 
 		list = query.list();
@@ -89,6 +89,10 @@ public class SchoolDao  extends HibernateDaoSupport{
 	public void updata(School school) {
 		// TODO Auto-generated method stub
 		this.getHibernateTemplate().update(school);
+	}
+	public void delete(School school) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().delete(school);
 	}
 
 }

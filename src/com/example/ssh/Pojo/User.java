@@ -6,11 +6,7 @@ public class User {
 	private String u_password;
 	private String u_mail;
 	private String u_phone;
-	@Override
-	public String toString() {
-		return "User [u_id=" + u_id + ", u_usename=" + u_usename + ", u_password=" + u_password + ", u_mail=" + u_mail
-				+ ", u_phone=" + u_phone + "]";
-	}
+	
 	public Integer getU_id() {
 		return u_id;
 	}

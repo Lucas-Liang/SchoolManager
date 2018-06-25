@@ -88,7 +88,7 @@ public class ClassAction extends ActionSupport implements ModelDriven<com.exampl
 		School school = new School();
 		school.setS_id(Integer.parseInt(c));
 		class1.setSchool(school);
-		System.out.println(class1.toString());
+
 		classService.updata(class1);
 		IndexPage<com.example.ssh.Pojo.Class> index = classService.findByPage(IndexPage);
 		ActionContext.getContext().getValueStack().push(index);
@@ -119,10 +119,15 @@ public class ClassAction extends ActionSupport implements ModelDriven<com.exampl
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    
-		
-		
-		
+	   
+	}
+	public String delete() {
+//		String s = ServletActionContext.getRequest().getParameter("c_id");   //获取用户名  
+//		int c_id = Integer.parseInt(s);
+		IndexPage<com.example.ssh.Pojo.Class> index = classService.findByPage(IndexPage);
+		ActionContext.getContext().getValueStack().push(index);
+		classService.delete(class1);
+		return "findAll";
 	}
 	
 	

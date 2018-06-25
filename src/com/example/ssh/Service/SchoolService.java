@@ -49,7 +49,7 @@ public class SchoolService {
 		int begin = (indexPage-1)*pageSize;
 		List<School> list = schoolDao.findByPageSreach(begin,pageSize,s_search);
 		inPage.setList(list);
-		System.out.println("----------->"+inPage.toString());
+		System.out.println("----------->"+inPage);
 		return inPage;
 	}
 	public void add(School school) {
@@ -63,9 +63,13 @@ public class SchoolService {
 	}
 	public void updata(School school) {
 		// TODO Auto-generated method stub
-		System.out.println(school.toString());
+		System.out.println(school);
 		schoolDao.updata(school);
 		
+	}
+	public void delete(School school) {
+		// TODO Auto-generated method stub
+		schoolDao.delete(school);
 	}
 	
 

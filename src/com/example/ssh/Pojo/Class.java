@@ -15,7 +15,7 @@ public class Class {
 	private String  c_name;
 	private String  c_info;
 	private School  school;
-	private Set<Student> student = new HashSet<Student>();
+	private Set<Student> student;
 	
 	
 	
@@ -30,11 +30,7 @@ public class Class {
 	}
 
 
-	@Override
-	public String toString() {
-		return "Class [c_id=" + c_id + ", c_name=" + c_name + ", c_info=" + c_info + ", school=" + school + ", student="
-				+ student + "]";
-	}
+	
 	
 	
 	public Integer getC_id() {

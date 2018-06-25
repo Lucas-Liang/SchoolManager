@@ -13,14 +13,16 @@
 		<property name="c_name" column="c_name" length="20"/>
 		<property name="c_info" column="c_info" length="20"/>
 		
-		<set name="student"  cascade="save-update" inverse="true" lazy="false">
-         <key column="st_id"></key>
+		<many-to-one name="school" class="com.example.ssh.Pojo.School"
+		 column="s_id">
+        </many-to-one> 
+        
+		<set name="student" lazy="false" >
+         <key column="c_id" not-null="false"></key>
          <one-to-many class="com.example.ssh.Pojo.Student"/>
         </set>
         
-		<many-to-one name="school" class="com.example.ssh.Pojo.School"
-		 column="s_id" insert="true" update="true">
-        </many-to-one> 
+		
 	</class>
 	
 </hibernate-mapping>

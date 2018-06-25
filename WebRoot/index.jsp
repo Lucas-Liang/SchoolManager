@@ -168,7 +168,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>
 							<a href="school_edit.action?s_id=${s.s_id}">编辑</a>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<a href="deleteProduct?s_id=${s.s_id}">删除</a>
+							<a href="school_delete.action?s_id=${s.s_id}">删除</a>
 						</td>		
 					</tr>
 				</s:iterator>

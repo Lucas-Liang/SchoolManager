@@ -50,7 +50,7 @@ public class ClassService {
 		int begin = (indexPage-1)*pageSize;
 		List<com.example.ssh.Pojo.Class> list = classDao.findByPageSreach(begin,pageSize,s_search);
 		inPage.setList(list);
-		System.out.println("----------->"+inPage.toString());
+		System.out.println("----------->"+inPage);
 		return inPage;
 	}
 	public void add(com.example.ssh.Pojo.Class class1) {
@@ -64,13 +64,17 @@ public class ClassService {
 	}
 	public void updata(com.example.ssh.Pojo.Class class1) {
 		// TODO Auto-generated method stub
-		System.out.println(class1.toString());
+		System.out.println(class1);
 		classDao.updata(class1);
 		
 	}
 	public List<School> getSchoolList() {
 		// TODO Auto-generated method stub
 		return classDao.getSchoolList();
+	}
+	public void delete(com.example.ssh.Pojo.Class class1) {
+		// TODO Auto-generated method stub
+		classDao.delete(class1);
 	}
 	
 
